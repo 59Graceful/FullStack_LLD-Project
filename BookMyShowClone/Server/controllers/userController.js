@@ -1,11 +1,12 @@
 const userModel = require("../models/userModel")
 const bcrypt = require('bcrypt')
-const registerUser = async(req, res)=>{
-    try{
+const jwt = require('jsonwebtoken');
+const registerUser = async (req, res) => {
+    try {
 
-       
-        const userExists = await userModel.findOne({email: req.body.email});
-        if(userExists) {
+
+        const userExists = await userModel.findOne({ email: req.body.email });
+        if (userExists) {
             return res.send({
                 success: false,
                 message: 'User Already Exists'
@@ -18,13 +19,37 @@ const registerUser = async(req, res)=>{
         const user = new userModel(req.body);
         const response = await user.save();
         console.log(response);
-        res.send({"success": true, "message": "Registration Successful, Please login"})
-    }catch(e){
+        res.send({ "success": true, "message": "Registration Successful, Please login" })
+    } catch (e) {
         console.log(e);
-        res.send({"success": false, "message": e.message})
+        res.send({ "success": false, "message": e.message })
     }
 }
 
-module.exports={
-    registerUser
+const LoginUser = async(req, res) => {
+    const user = await userModel.findOne({ email: req.body.email });
+    if (!user) {
+        return res.send({
+            success: false,
+            message: 'User does not exists'
+        })
+    }
+
+    const validatePassword = await bcrypt.compare(req.body.password, user.password);
+    if(!validatePassword){
+        return res.send({
+            success: false,
+            message: 'Incorrect Password'
+        })
+    }
+    const token = jwt.sign({userId:user._id}, process.env.SecretKey ,{expiresIn: '1d'})
+    res.send({
+        success: true,
+        message: 'User Logged In',
+        data: token
+    })
+}
+module.exports = {
+    registerUser,
+    LoginUser
 }
