@@ -1,10 +1,9 @@
 const userModel = require("../models/userModel")
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
+
 const registerUser = async (req, res) => {
     try {
-
-
         const userExists = await userModel.findOne({ email: req.body.email });
         if (userExists) {
             return res.send({
@@ -49,7 +48,23 @@ const LoginUser = async(req, res) => {
         data: token
     })
 }
+const getCurrentUserInfo = async (req, res) => {
+    try {
+        const user = await userModel.findById(req.user.userId).select('-password')
+        res.send({
+            success : true,
+            message : 'User details fetched Successfully',
+            data : user
+        })
+    } catch (error) {
+        res.send({
+            success: false,
+            message: error.message,
+          });
+    }
+}
 module.exports = {
     registerUser,
-    LoginUser
+    LoginUser,
+    getCurrentUserInfo
 }
