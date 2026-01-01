@@ -8,7 +8,7 @@ const dbConfig = require("./config/dbconfig");
 app.use(cors())
 app.use(express.json())
 app.use('/api/users',userRouter);
-app.use('/api/users', movieRoute)
+app.use('/api/movies', movieRoute)
 
 app.listen(process.env.PORT,()=>{
     console.log(`server is listening to port no ${process.env.PORT}`)

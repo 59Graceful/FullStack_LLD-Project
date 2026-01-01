@@ -4,7 +4,7 @@ import Button from "../../Components/Button/Button"
 import { useDispatch } from "react-redux";
 import { HideLoading, ShowLoading } from "../../redux/loadersSlice";
 import moment from "moment";
-//import { AddMovie, UpdateMovie } from "../../ApiCalls/movies";
+import { AddMovie, UpdateMovie } from "../../ApiCalls/movies";
 
 
 
@@ -23,32 +23,32 @@ function MovieForm({
   }
 
   const dispatch = useDispatch();
-//   const onFinish = async (values) => {
-//     try {
-//       dispatch(ShowLoading());
-//       let response = null;
+  const onFinish = async (values) => {
+    try {
+      dispatch(ShowLoading());
+      let response = null;
 
-//       if (formType === "add") {
-//         response = await AddMovie(values);
-//       } else {
-//         response = await UpdateMovie({
-//           ...values,
-//           movieId: selectedMovie._id,
-//         });
-//       }
-//       if (response.success) {
-//         getData();
-//         message.success(response.message);
-//         setShowMovieFormModal(false);
-//       } else {
-//         message.error(response.message);
-//       }
-//       dispatch(HideLoading());
-//     } catch (error) {
-//       dispatch(HideLoading());
-//       message.error(error.message);
-//     }
-//   };
+      if (formType === "add") {
+        response = await AddMovie(values);
+      } else {
+        response = await UpdateMovie({
+          ...values,
+          movieId: selectedMovie._id,
+        });
+      }
+      if (response.success) {
+        getData();
+        message.success(response.message);
+        setShowMovieFormModal(false);
+      } else {
+        message.error(response.message);
+      }
+      dispatch(HideLoading());
+    } catch (error) {
+      dispatch(HideLoading());
+      message.error(error.message);
+    }
+  };
 
   return (
     <Modal
@@ -61,7 +61,7 @@ function MovieForm({
       footer={null}
       width={800}
     >
-      <Form layout="vertical" initialValues={selectedMovie} /*onFinish={onFinish}*/>
+      <Form layout="vertical" initialValues={selectedMovie} onFinish={onFinish}>
         <Row gutter={16}>
           <Col span={24}>
             <Form.Item label="Movie Name" name="title">
@@ -89,6 +89,7 @@ function MovieForm({
                 <option value="English">English</option>
                 <option value="Hindi">Hindi</option>
                 <option value="Tamil">Tamil</option>
+                <option value="Marathi">Marathi</option>
               </select>
             </Form.Item>
           </Col>
