@@ -6,6 +6,7 @@ import Register from './pages/Register/Register';
 import Home from './pages/Home/Home';
 import Profile from './pages/Profile/index';
 import Admin from './pages/Admin/index';
+import TheatresForMovie from './pages/TheatresForMovie';
 import "./stylesheets/alignment.css"
 import "./stylesheets/custom.css";
 import "./stylesheets/form-element.css";
@@ -22,6 +23,7 @@ function App() {
         <Route path = "/register" element={<Register />}/>
         <Route path='/profile' element={<ProtectedRoute><Profile /></ProtectedRoute>}/>
         <Route path = '/admin' element={<ProtectedRoute><Admin /></ProtectedRoute>}/>
+        <Route path = "/movie/:id" element={<ProtectedRoute><TheatresForMovie /></ProtectedRoute>}/>
       </Routes>
       </BrowserRouter>
     </div>

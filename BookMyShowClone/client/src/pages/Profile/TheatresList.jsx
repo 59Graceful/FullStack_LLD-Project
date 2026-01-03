@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { HideLoading, ShowLoading } from "../../redux/loadersSlice";
 import { message, Table } from "antd";
 import Button from '../../Components/Button/Button'
-import { GetAllTheatresByOwner, DeleteTheatre } from "../../ApiCalls/threatres";
+import { GetAllTheatresByOwner, DeleteTheatre } from "../../ApiCalls/theatres";
 import Shows from "./Shows";
 
 function TheatresList() {

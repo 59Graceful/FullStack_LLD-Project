@@ -1,5 +1,5 @@
 const Theatre = require("../models/theatreModal");
-// const show = require("../models/showModel");
+const show = require("../models/showModel");
 
 const addTheatre = async (req, res) => {
   try {

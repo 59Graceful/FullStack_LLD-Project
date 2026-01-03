@@ -3,7 +3,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
  import Button from '../../Components/Button/Button'
 import { HideLoading, ShowLoading } from "../../redux/loadersSlice";
-import { AddTheatre, UpdateTheatre } from "../../ApiCalls/threatres";
+import { AddTheatre, UpdateTheatre } from "../../ApiCalls/theatres";
 
 function TheatreForm({
   showTheatreFormModal,

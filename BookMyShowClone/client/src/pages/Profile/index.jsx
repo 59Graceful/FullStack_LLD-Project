@@ -1,8 +1,23 @@
 import React from 'react'
+import { Tabs} from 'antd';
+import PageTitle from '../../Components/PageTitle';
+import Booking from './Bookings'
+import TheatresList from './TheatresList';
 
 const Profile = () => {
   return (
-    <div>Profile</div>
+    <div>
+      <PageTitle title="Profile" />
+
+      <Tabs defaultActiveKey="1">
+        <Tabs.TabPane tab="Bookings" key="1">
+           <Booking />
+        </Tabs.TabPane>
+        <Tabs.TabPane tab="Apply for Theater" key="2">
+           <TheatresList/>
+        </Tabs.TabPane>
+      </Tabs>
+    </div>
   )
 }
 
