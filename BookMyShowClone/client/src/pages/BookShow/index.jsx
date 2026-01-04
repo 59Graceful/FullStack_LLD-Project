@@ -95,15 +95,16 @@ function BookShow() {
         );
     };
 
-    const book = async (transactionId) => {
+    const book = async ({ showId, seats, transactionId, userId }) => {
         try {
             dispatch(ShowLoading());
             const response = await BookShowTickets({
-                show: params.id,
-                seats: selectedSeats,
+                show: showId,
+                seats,
                 transactionId,
-                user: user._id,
+                user: userId,
             });
+
             if (response.success) {
                 message.success(response.message);
                 navigate("/profile");
@@ -116,6 +117,7 @@ function BookShow() {
             dispatch(HideLoading());
         }
     };
+
 
     // const onToken = async (token) => {
     //     console.log(token)
@@ -194,6 +196,17 @@ function BookShow() {
                             onClick={async () => {
                                 try {
                                     dispatch(ShowLoading());
+
+                                    // ✅ store booking info FIRST
+                                    localStorage.setItem(
+                                        "pending-booking",
+                                        JSON.stringify({
+                                            showId: params.id,
+                                            seats: selectedSeats,
+                                            userId: user._id,
+                                        })
+                                    );
+
                                     const response = await MakePayment({
                                         amount: selectedSeats.length * show.ticketPrice * 100,
                                     });
@@ -202,14 +215,18 @@ function BookShow() {
                                         window.location.href = response.url;
                                     } else {
                                         message.error(response.message);
+                                        localStorage.removeItem("pending-booking");
                                     }
+
                                     dispatch(HideLoading());
                                 } catch (error) {
+                                    localStorage.removeItem("pending-booking");
                                     message.error(error.message);
                                     dispatch(HideLoading());
                                 }
                             }}
                         />
+
 
                     </div>
                 )}

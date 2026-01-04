@@ -7,6 +7,7 @@ import Home from './pages/Home/Home';
 import Profile from './pages/Profile/index';
 import Admin from './pages/Admin/index';
 import TheatresForMovie from './pages/TheatresForMovie';
+import PaymentSuccess from './pages/PaymentSuccess/paymentSuccess';
 import BookShow from './pages/BookShow';
 import "./stylesheets/alignment.css"
 import "./stylesheets/custom.css";
@@ -26,6 +27,7 @@ function App() {
         <Route path = '/admin' element={<ProtectedRoute><Admin /></ProtectedRoute>}/>
         <Route path = "/movie/:id" element={<ProtectedRoute><TheatresForMovie /></ProtectedRoute>}/>
         <Route path = "/book-show/:id" element={<ProtectedRoute><BookShow /></ProtectedRoute>}/>
+        <Route path = "/payment-success" element={<ProtectedRoute><PaymentSuccess /></ProtectedRoute>}/>
       </Routes>
       </BrowserRouter>
     </div>

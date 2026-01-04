@@ -81,14 +81,43 @@ router.post("/make-payment", validatingAuthToken, async (req, res) => {
 });
 
 
+// router.post("/book-show", validatingAuthToken, async (req, res) => {
+//   try {
+//     // save booking
+//     const newBooking = new Booking(req.body);
+//     await newBooking.save();
+
+//     const show = await Show.findById(req.body.show);
+//     // update seats
+//     await Show.findByIdAndUpdate(req.body.show, {
+//       bookedSeats: [...show.bookedSeats, ...req.body.seats],
+//     });
+
+//     res.send({
+//       success: true,
+//       message: "Show booked successfully",
+//       data: newBooking,
+//     });
+//   } catch (error) {
+//     res.send({
+//       success: false,
+//       message: error.message,
+//     });
+//   }
+// });
+
 router.post("/book-show", validatingAuthToken, async (req, res) => {
   try {
-    // save booking
-    const newBooking = new Booking(req.body);
+    const newBooking = new Booking({
+      show: req.body.show,
+      seats: req.body.seats,
+      transactionId: req.body.transactionId,
+      user: req.userId, // ✅ ALWAYS from token
+    });
+
     await newBooking.save();
 
     const show = await Show.findById(req.body.show);
-    // update seats
     await Show.findByIdAndUpdate(req.body.show, {
       bookedSeats: [...show.bookedSeats, ...req.body.seats],
     });
@@ -106,24 +135,47 @@ router.post("/book-show", validatingAuthToken, async (req, res) => {
   }
 });
 
+// router.get("/get-bookings", validatingAuthToken, async (req, res) => {
+//   try {
+//     const bookings = await Booking.find({ user: req.userId })
+//       .populate("show")
+//       .populate({
+//         path: "show",
+//         populate: {
+//           path: "movie",
+//           model: "movies",
+//         },
+//       })
+//       .populate("user")
+//       .populate({
+//         path: "show",
+//         populate: {
+//           path: "theatre",
+//           model: "theatres",
+//         },
+//       });
+
+//     res.send({
+//       success: true,
+//       message: "Bookings fetched successfully",
+//       data: bookings,
+//     });
+//   } catch (error) {
+//     res.send({
+//       success: false,
+//       message: error.message,
+//     });
+//   }
+// });
 router.get("/get-bookings", validatingAuthToken, async (req, res) => {
   try {
-    const bookings = await Booking.find({ user: req.body.userId })
-      .populate("show")
+    const bookings = await Booking.find({ user: req.userId })
       .populate({
         path: "show",
-        populate: {
-          path: "movie",
-          model: "movies",
-        },
-      })
-      .populate("user")
-      .populate({
-        path: "show",
-        populate: {
-          path: "theatre",
-          model: "theatres",
-        },
+        populate: [
+          { path: "movie", model: "movies" },
+          { path: "theatre", model: "theatres" },
+        ],
       });
 
     res.send({
@@ -138,5 +190,6 @@ router.get("/get-bookings", validatingAuthToken, async (req, res) => {
     });
   }
 });
+
 
 module.exports = router;
