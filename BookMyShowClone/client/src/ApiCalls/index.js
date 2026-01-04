@@ -13,7 +13,7 @@
 import axios from "axios";
 
 export const axiosInstance = axios.create({
-    baseURL: "http://localhost:3000", // optional if using absolute paths
+    baseURL: process.env.REACT_APP_API_URL, // optional if using absolute paths
     headers: {
         "Content-Type": "application/json",
     },
