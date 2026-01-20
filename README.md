@@ -8,6 +8,7 @@ This repository contains the complete source code for the BookMyShow Clone, a fu
 
 The objective of this project is to design and implement a scalable web-based movie ticket booking system that reflects real-world application workflows while applying core software engineering principles, low-level system design concepts, and modern web technologies.
 
+_________________________________________________________________________________________________________________________________________________________
 2. Project Overview
 
 The BookMyShow Clone is a role-based ticket booking platform that enables users to:
@@ -26,6 +27,7 @@ In addition to regular users, the system supports theatre owners for show manage
 
 The application is built using the MERN Stack (MongoDB, Express.js, React.js, Node.js) and follows a client–server architecture.
 
+___________________________________________________________________________________________________________________________________________
 3. System Roles
 
 The application supports the following user roles:
@@ -58,6 +60,7 @@ Monitor platform data
 
 Ensure system integrity
 
+_____________________________________________________________________________________________________________________________________
 4. Technology Stack
 
 Frontend
@@ -92,6 +95,7 @@ Database
 
 MongoDB Atlas (Cloud Database)
 
+_____________________________________________________________________________________________________________________________________
 5. Core Functionalities
 
 User authentication and authorization
@@ -110,6 +114,7 @@ Booking persistence
 
 Profile-based booking history
 
+_____________________________________________________________________________________________________________________________________
 6. Security Implementation
 
 Passwords are hashed using bcrypt before storage
@@ -122,6 +127,7 @@ Payment details are handled entirely by Stripe and are never stored in the appli
 
 Backend validations prevent invalid booking operations
 
+_____________________________________________________________________________________________________________________________________
 7. Payment Workflow
 
 The application integrates Stripe Checkout for secure online payments.
@@ -136,6 +142,7 @@ Seat availability is updated server-side
 
 No real monetary transactions occur.
 
+_____________________________________________________________________________________________________________________________________
 8. Project Structure
 BookMyShowClone/
 │
@@ -151,7 +158,7 @@ BookMyShowClone/
 │   └── server.js
 │
 └── README.md
-
+_____________________________________________________________________________________________________________________________________
 9. Deployment
 
 The application was deployed using cloud-based services for academic demonstration:
@@ -164,21 +171,9 @@ MongoDB Atlas used as cloud database
 
 Environment variables configured securely via deployment dashboards
 
-10. Limitations
 
-Payments run only in Stripe test mode
-
-Refunds are not implemented
-
-Webhook-based payment verification is not included
-
-Real-time seat locking using WebSockets is not implemented
-
-No mobile application support
-
-These limitations were defined due to academic scope and time constraints.
-
-11. Future Enhancements
+____________________________________________________________________________________________________________________________________
+10. Future Enhancements
 
 Real-time seat updates using WebSockets
 
@@ -191,8 +186,8 @@ Email notifications
 Mobile application development
 
 Advanced concurrency handling
-
-12. Academic Declaration
+____________________________________________________________________________________________________________________________________
+11. Academic Declaration
 
 This project was developed solely for educational purposes as part of the Scaler Neovarsity academic curriculum.
 No commercial usage is intended.
